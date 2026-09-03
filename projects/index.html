@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Attiq ur Rehman</title>
+<meta name="description" content="Side projects by Attiq ur Rehman — Seatwise exam seating planner, an offline JWT decoder/generator, and a Google-Sheets-backed expense ledger PWA.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Projects — Attiq ur Rehman">
+<meta property="og:description" content="Small, dependency-free tools: Seatwise, JWT Decoder / Generator, and Expense Ledger.">
+<meta property="og:url" content="https://attiqtherehman.github.io/projects/">
+<meta property="og:image" content="https://attiqtherehman.github.io/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Projects — Attiq ur Rehman">
+<meta name="twitter:description" content="Small, dependency-free tools: Seatwise, JWT Decoder / Generator, and Expense Ledger.">
+<meta name="twitter:image" content="https://attiqtherehman.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F1626'/%3E%3Cpath d='M18 48 L32 16 L46 48' fill='none' stroke='%235B8DEF' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M24 38 L40 38 L48 28' fill='none' stroke='%23E8A33D' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M48 28 l-7 1 M48 28 l-1 7' stroke='%23E8A33D' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --mono:'IBM Plex Mono',monospace;
+    --body:'IBM Plex Sans',sans-serif;
+    --display:'Space Grotesk',sans-serif;
+  }
+  [data-theme="dark"]{
+    --bg:#0F1626;
+    --surface:#161F33;
+    --surface-2:#1C2740;
+    --ink:#E8EDF6;
+    --ink-soft:#9AA9C2;
+    --line:#273450;
+    --accent:#5B8DEF;
+    --accent-strong:#7CA5F5;
+    --accent-soft:rgba(91,141,239,.14);
+    --amber:#E8A33D;
+    --header-bg:rgba(15,22,38,.88);
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  [data-theme="light"]{
+    --bg:#F2F5F9;
+    --surface:#FFFFFF;
+    --surface-2:#FFFFFF;
+    --ink:#16233A;
+    --ink-soft:#4A5A74;
+    --line:#D8E0EB;
+    --accent:#1D5BDB;
+    --accent-strong:#1648B0;
+    --accent-soft:#E3ECFC;
+    --amber:#D18A1F;
+    --header-bg:rgba(242,245,249,.9);
+    --shadow:0 8px 24px rgba(22,35,58,.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    transition:background .25s ease,color .25s ease;
+  }
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:10;
+    background:var(--header-bg);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+  .brand{font-family:var(--mono);font-size:.85rem;letter-spacing:.02em;white-space:nowrap;display:flex;align-items:center;gap:9px;color:var(--ink)}
+  .brand:hover{text-decoration:none}
+  .brand-mark{width:22px;height:22px;flex:none;border-radius:5px}
+  .brand b{color:var(--accent)}
+  .nav-right{display:flex;align-items:center;gap:18px}
+  nav ul{display:flex;gap:20px;list-style:none}
+  nav a{font-size:.85rem;color:var(--ink-soft);font-weight:500}
+  nav a:hover{color:var(--accent);text-decoration:none}
+  nav a[aria-current="page"]{color:var(--accent)}
+  .theme-toggle{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--surface);border:1px solid var(--line);
+    color:var(--ink);border-radius:99px;
+    font-family:var(--mono);font-size:.72rem;
+    padding:6px 12px;cursor:pointer;
+    transition:border-color .2s ease;
+  }
+  .theme-toggle:hover{border-color:var(--accent)}
+  .theme-toggle .icon{width:14px;height:14px;display:block}
+  .menu-btn{
+    display:none;background:var(--surface);border:1px solid var(--line);
+    color:var(--ink);border-radius:8px;padding:6px 9px;cursor:pointer;
+  }
+  .menu-btn svg{width:18px;height:18px;display:block}
+  @media(max-width:680px){
+    .theme-toggle .label{display:none}
+    .menu-btn{display:inline-flex}
+    nav ul{
+      display:none;position:absolute;top:60px;left:0;right:0;
+      flex-direction:column;gap:0;
+      background:var(--header-bg);backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line);
+      padding:8px 24px 14px;
+    }
+    nav.open ul{display:flex}
+    nav ul li{padding:10px 0;border-bottom:1px solid var(--line)}
+    nav ul li:last-child{border-bottom:none}
+    nav a{font-size:.95rem;display:block}
+  }
+
+  /* ---------- page intro ---------- */
+  .hero{padding:72px 0 8px}
+  .kicker{
+    font-family:var(--mono);font-size:.78rem;color:var(--accent);
+    letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px;
+  }
+  h1{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(2rem,5vw,2.8rem);
+    line-height:1.1;letter-spacing:-.02em;margin-bottom:20px;
+  }
+  h1 .accent{color:var(--accent-strong)}
+  .lede{max-width:600px;color:var(--ink-soft);font-size:1.05rem}
+
+  /* ---------- project cards ---------- */
+  section{padding:48px 0 64px}
+  .project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px}
+  .project-card{
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:12px;padding:26px 24px;
+    display:flex;flex-direction:column;gap:14px;
+    transition:border-color .2s ease;
+  }
+  .project-card:hover{border-color:var(--accent)}
+  .project-card h2{
+    font-family:var(--display);font-size:1.18rem;font-weight:700;letter-spacing:-.01em;
+    display:flex;align-items:center;gap:10px;
+  }
+  .project-card h2 .dot{width:9px;height:9px;border-radius:50%;background:var(--amber);flex:none}
+  .project-card p{color:var(--ink-soft);font-size:.92rem;flex:1}
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{
+    font-family:var(--mono);font-size:.72rem;
+    background:var(--accent-soft);color:var(--accent-strong);
+    padding:3px 10px;border-radius:99px;
+  }
+  .btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+  .btn{
+    font-family:var(--mono);font-size:.78rem;font-weight:500;
+    padding:8px 18px;border-radius:8px;display:inline-block;
+  }
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{background:var(--accent-strong);text-decoration:none}
+  .btn-ghost{border:1px solid var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+  .note{
+    font-family:var(--mono);font-size:.72rem;color:var(--ink-soft);
+  }
+  .note::before{content:"› ";color:var(--amber)}
+
+  footer{padding:34px 0 44px;text-align:center;font-family:var(--mono);font-size:.75rem;color:var(--ink-soft)}
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#0F1626" stroke="#273450"/><path d="M18 48 L32 16 L46 48" fill="none" stroke="#5B8DEF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 38 L40 38 L48 28" fill="none" stroke="#E8A33D" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M48 28 l-7 1 M48 28 l-1 7" stroke="#E8A33D" stroke-width="5" stroke-linecap="round"/></svg><b>attiq</b>@portfolio:~$</a>
+    <div class="nav-right">
+      <nav aria-label="Main" id="mainNav">
+        <ul>
+          <li><a href="/#experience">Experience</a></li>
+          <li><a href="/#skills">Skills</a></li>
+          <li><a href="/#education">Education</a></li>
+          <li><a href="/projects/" aria-current="page">Projects</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch to light theme">
+        <svg class="icon" id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon" id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <span class="label" id="themeLabel">light</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <p class="kicker">Projects</p>
+    <h1>Small tools, <span class="accent">zero dependencies</span>.</h1>
+    <p class="lede">Side projects built the same way I like production software: plain, dependable, and framework-free. Each one is a single HTML file you can read end to end.</p>
+  </section>
+
+  <section aria-label="Project list">
+    <div class="project-grid">
+
+      <article class="project-card reveal">
+        <h2><span class="dot" aria-hidden="true"></span>Seatwise</h2>
+        <p>Exam-hall seating planner — no two students of the same section sit adjacent, not even diagonally. CSV in, printable colour-coded seat maps out, with room-wise and section-wise views. Started as a 2019 UET Lahore algorithms project, modernized in 2026.</p>
+        <div class="tags">
+          <span class="tag">Vanilla JS</span><span class="tag">CSV</span><span class="tag">Print styles</span>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="https://attiqtherehman.github.io/seatwise/" target="_blank" rel="noopener">Live demo</a>
+          <a class="btn btn-ghost" href="https://github.com/attiqtherehman/seatwise" target="_blank" rel="noopener">Source</a>
+        </div>
+      </article>
+
+      <article class="project-card reveal">
+        <h2><span class="dot" aria-hidden="true"></span>JWT Decoder / Generator</h2>
+        <p>Decode and generate JSON Web Tokens entirely in the browser — handles raw and base64-wrapped tokens, signs HS256 via the Web Crypto API. Fully offline: no build step, no dependencies, no network calls, so tokens never leave the page.</p>
+        <div class="tags">
+          <span class="tag">JavaScript</span><span class="tag">Web Crypto</span><span class="tag">Offline</span>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="https://attiqtherehman.github.io/JWT-Decoder/" target="_blank" rel="noopener">Live demo</a>
+          <a class="btn btn-ghost" href="https://github.com/attiqtherehman/JWT-Decoder" target="_blank" rel="noopener">Source</a>
+        </div>
+      </article>
+
+      <article class="project-card reveal">
+        <h2><span class="dot" aria-hidden="true"></span>Expense Ledger</h2>
+        <p>Installable expense-tracker PWA with a Google Sheet as the database, wired up through Apps Script. Month, year, and all-time views with drill-down, offline shell via a service worker, and live sync status.</p>
+        <div class="tags">
+          <span class="tag">PWA</span><span class="tag">Vanilla JS</span><span class="tag">Google Sheets</span>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-ghost" href="https://github.com/attiqtherehman/expense-tracker" target="_blank" rel="noopener">Source</a>
+        </div>
+        <p class="note">Runs against my personal ledger, so no public demo.</p>
+      </article>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>© 2026 Attiq ur Rehman · plain HTML &amp; CSS, no framework · hosted on GitHub Pages</footer>
+
+<script>
+  // ---- theme toggle (dark by default, remembered across visits) ----
+  const root = document.documentElement;
+  const toggle = document.getElementById('themeToggle');
+  const iconSun = document.getElementById('iconSun');
+  const iconMoon = document.getElementById('iconMoon');
+  const themeLabel = document.getElementById('themeLabel');
+
+  function applyTheme(theme){
+    root.setAttribute('data-theme', theme);
+    const isDark = theme === 'dark';
+    iconSun.style.display = isDark ? 'block' : 'none';
+    iconMoon.style.display = isDark ? 'none' : 'block';
+    themeLabel.textContent = isDark ? 'light' : 'dark';
+    toggle.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+    try { localStorage.setItem('theme', theme); } catch(e){ /* storage unavailable — theme just won't persist */ }
+  }
+
+  let saved = null;
+  try { saved = localStorage.getItem('theme'); } catch(e){}
+  applyTheme(saved === 'light' ? 'light' : 'dark');
+
+  toggle.addEventListener('click', () => {
+    applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  // ---- mobile menu ----
+  const menuBtn = document.getElementById('menuBtn');
+  const mainNav = document.getElementById('mainNav');
+  menuBtn.addEventListener('click', () => {
+    const open = mainNav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mainNav.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }));
+
+  // ---- reveal on scroll ----
+  const items = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    items.forEach(el => io.observe(el));
+  } else {
+    items.forEach(el => el.classList.add('in'));
+  }
+</script>
+
+</body>
+</html>
