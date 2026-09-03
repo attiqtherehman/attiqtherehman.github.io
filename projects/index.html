@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Projects — Attiq ur Rehman</title>
-<meta name="description" content="Side projects by Attiq ur Rehman — Seatwise exam seating planner, an offline JWT decoder/generator, and a Google-Sheets-backed expense ledger PWA.">
+<meta name="description" content="Side projects by Attiq ur Rehman — Seatwise exam seating planner, an offline JWT decoder/generator, a client-side OTP authenticator, and a Google-Sheets-backed expense ledger PWA.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Projects — Attiq ur Rehman">
-<meta property="og:description" content="Small, dependency-free tools: Seatwise, JWT Decoder / Generator, and Expense Ledger.">
+<meta property="og:description" content="Small, dependency-free tools: Seatwise, JWT Decoder / Generator, OTP Authenticator, and Expense Ledger.">
 <meta property="og:url" content="https://attiqtherehman.github.io/projects/">
 <meta property="og:image" content="https://attiqtherehman.github.io/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Projects — Attiq ur Rehman">
-<meta name="twitter:description" content="Small, dependency-free tools: Seatwise, JWT Decoder / Generator, and Expense Ledger.">
+<meta name="twitter:description" content="Small, dependency-free tools: Seatwise, JWT Decoder / Generator, OTP Authenticator, and Expense Ledger.">
 <meta name="twitter:image" content="https://attiqtherehman.github.io/og-image.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F1626'/%3E%3Cpath d='M18 48 L32 16 L46 48' fill='none' stroke='%235B8DEF' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M24 38 L40 38 L48 28' fill='none' stroke='%23E8A33D' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M48 28 l-7 1 M48 28 l-1 7' stroke='%23E8A33D' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -210,7 +210,7 @@
   <section class="hero">
     <p class="kicker">Projects</p>
     <h1>Small tools, <span class="accent">zero dependencies</span>.</h1>
-    <p class="lede">Side projects built the same way I like production software: plain, dependable, and framework-free. Each one is a single HTML file you can read end to end.</p>
+    <p class="lede">Side projects built the same way I like production software: plain, dependable, and framework-free. Vanilla JS, no build step, nothing between you and the source.</p>
   </section>
 
   <section aria-label="Project list">
@@ -237,6 +237,18 @@
         <div class="btn-row">
           <a class="btn btn-primary" href="https://attiqtherehman.github.io/JWT-Decoder/" target="_blank" rel="noopener">Live demo</a>
           <a class="btn btn-ghost" href="https://github.com/attiqtherehman/JWT-Decoder" target="_blank" rel="noopener">Source</a>
+        </div>
+      </article>
+
+      <article class="project-card reveal">
+        <h2><span class="dot" aria-hidden="true"></span>OTP Authenticator</h2>
+        <p>Client-side Google Authenticator replica — TOTP/HOTP codes computed in the browser with the Web Crypto API, secrets kept in an AES-GCM-encrypted vault that never leaves your device. Enroll by QR paste, upload, camera or screen scan, or import straight from Google Authenticator's transfer QR. Installable, works offline.</p>
+        <div class="tags">
+          <span class="tag">PWA</span><span class="tag">Web Crypto</span><span class="tag">WebAssembly</span>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="https://attiqtherehman.github.io/otp-authenticator/" target="_blank" rel="noopener">Live demo</a>
+          <a class="btn btn-ghost" href="https://github.com/attiqtherehman/otp-authenticator" target="_blank" rel="noopener">Source</a>
         </div>
       </article>
 
